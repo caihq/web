@@ -57,7 +57,7 @@
                                     </li>
                                     <!--/Theme Selector Area-->
                                     <li class="dropdown-footer">
-                                        <a href="login.html">
+                                        <a href="admin/system/logout">
                                             Sign out
                                         </a>
                                     </li>

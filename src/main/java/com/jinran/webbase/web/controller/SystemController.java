@@ -24,6 +24,11 @@ public class SystemController {
 		@RequestMapping(value = "/login", method = { RequestMethod.POST, RequestMethod.GET })
 		public String login(String username, String password, String remember, Model model, HttpServletResponse response,
 				HttpSession session) {
+			System.out.println("------remember------"+remember);
+			if(username == null||password ==null){
+				return "system/login";
+			}
+			
 			if (username.equals("admin") && password.equals("123123")) {
 				// 记住密码
 				Cookie namecookie = new Cookie("username", username);
@@ -45,20 +50,25 @@ public class SystemController {
 
 		@RequestMapping(value = "/loginHuitaoStatistics")
 		public String loginHuitaoStatics() {
-			return "redirect:http://192.168.0.160:8080/webconfig/admin/system/login?userName=admin&passWord="
+			return "redirect:http://192.168.0.160:8080/web/admin/system/login?userName=admin&passWord="
 					+ 123123;
 		}
 
 		// 注销
 		@RequestMapping(value = "/logout", method = RequestMethod.GET)
 		public String logout(HttpSession session) {
+			System.out.println("/logout");
 			session.invalidate();
 			return "system/login";
 		}
 
 		// 跳转到首页
 		@RequestMapping(value = "/index", method = RequestMethod.GET)
-		public String gotoIndext() {
+		public String gotoIndext(HttpSession session) {
+			String username = (String) session.getAttribute("username");
+			if(username == null){
+				return "system/login";
+			}
 			return "home/index";
 		}
 }

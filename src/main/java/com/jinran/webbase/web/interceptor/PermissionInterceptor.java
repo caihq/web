@@ -15,6 +15,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		Object obj = request.getSession().getAttribute("username");
+		System.out.println("PermissionInterceptor");
 		if (obj == null) {
 			logger.info("用户没有登录");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
